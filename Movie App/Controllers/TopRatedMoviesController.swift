@@ -7,35 +7,54 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    let movies = ["Transporter 1", "Transporter 2", "Transporter 3", "Transporter 4", "Transporter 5", "Transporter 5", "Transporter 5", "Transporter 5"];
+    var movies : NSArray = [];
     
-        @IBOutlet weak var topRatedCollectionView: UICollectionView!
+    @IBOutlet weak var topRatedCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         topRatedCollectionView.dataSource = self;
         topRatedCollectionView.delegate = self;
-        // Do any additional setup after loading the view, typically from a nib.
+        fetchMovies()
     }
 
+    func fetchMovies() {
+        
+        // Resolve promise and use assign values
+        Movies.topRated(){  responseObject, error in
+            
+            let serializedData = responseObject!["results"] as! NSArray
+            
+            self.movies = serializedData
+            
+            self.topRatedCollectionView.reloadData()
+        }
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-
+    // Set collection size
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count;
     }
     
+    // Assign data to cellItem
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridItem", for: indexPath) as! GridItem;
         
-        cell.titleLabel.text = movies[indexPath.item];
+        // Serialized object
+        let movie = Movie(serializedMovie: movies[indexPath.item])
+        
+        cell.titleLabel.text = movie.title;
+        cell.setImage(path: movie.poster)
         
         return cell;
     }
