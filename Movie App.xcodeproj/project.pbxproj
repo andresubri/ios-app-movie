@@ -15,6 +15,7 @@
 		4B68D27021547C6A00382B07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B68D26E21547C6A00382B07 /* LaunchScreen.storyboard */; };
 		4B68D27B21547C6B00382B07 /* Movie_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B68D27A21547C6B00382B07 /* Movie_AppTests.swift */; };
 		4B68D28621547C6B00382B07 /* Movie_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B68D28521547C6B00382B07 /* Movie_AppUITests.swift */; };
+		4B68D297215486E900382B07 /* GridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B68D295215486E900382B07 /* GridItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		4B68D28121547C6B00382B07 /* Movie AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Movie AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B68D28521547C6B00382B07 /* Movie_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie_AppUITests.swift; sourceTree = "<group>"; };
 		4B68D28721547C6B00382B07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B68D295215486E900382B07 /* GridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		4B68D26221547C6A00382B07 /* Movie App */ = {
 			isa = PBXGroup;
 			children = (
+				4B68D2932154867E00382B07 /* Resources */,
 				4B68D26321547C6A00382B07 /* AppDelegate.swift */,
 				4B68D26521547C6A00382B07 /* FirstViewController.swift */,
 				4B68D26721547C6A00382B07 /* SecondViewController.swift */,
@@ -126,6 +129,22 @@
 				4B68D28721547C6B00382B07 /* Info.plist */,
 			);
 			path = "Movie AppUITests";
+			sourceTree = "<group>";
+		};
+		4B68D2932154867E00382B07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4B68D2942154869100382B07 /* GridItem */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4B68D2942154869100382B07 /* GridItem */ = {
+			isa = PBXGroup;
+			children = (
+				4B68D295215486E900382B07 /* GridItem.swift */,
+			);
+			path = GridItem;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +283,7 @@
 			files = (
 				4B68D26821547C6A00382B07 /* SecondViewController.swift in Sources */,
 				4B68D26421547C6A00382B07 /* AppDelegate.swift in Sources */,
+				4B68D297215486E900382B07 /* GridItem.swift in Sources */,
 				4B68D26621547C6A00382B07 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
