@@ -8,9 +8,9 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    let movies = ["Transporter 1", "Transporter 2", "Transporter 3", "Transporter 4", "Transporter 5", "Transporter 5", "Transporter 5", "Transporter 5", "Transporter 5"];
+    let movies = ["Transporter 1", "Transporter 2", "Transporter 3", "Transporter 4", "Transporter 5", "Transporter 5", "Transporter 5", "Transporter 5"];
     
         @IBOutlet weak var topRatedCollectionView: UICollectionView!
     
