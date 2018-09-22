@@ -23,6 +23,9 @@
 		4BA6CB792154C81000619901 /* RequestTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA6CB782154C81000619901 /* RequestTypes.swift */; };
 		4BD9E6EF2154E09C00C6412C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD9E6F02154E09C00C6412C /* Alamofire.framework */; };
 		4BD9E6F12154F17E00C6412C /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD9E6F22154F17E00C6412C /* AlamofireImage.framework */; };
+		4BD9E6F4215506C000C6412C /* TheMovieDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD9E6F3215506C000C6412C /* TheMovieDB.swift */; };
+		4BD9E6F5215506F900C6412C /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD9E6F7215506F900C6412C /* Moya.framework */; };
+		4BD9E6F6215506F900C6412C /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD9E6F8215506F900C6412C /* Result.framework */; };
 		C39302BD683ECA29312AF24D /* Pods_Movie_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8E983551747B4DB63D8CEC /* Pods_Movie_App.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +72,9 @@
 		4BD9E6EE2154DFB800C6412C /* Alamofire_SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire_SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD9E6F02154E09C00C6412C /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD9E6F22154F17E00C6412C /* AlamofireImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BD9E6F3215506C000C6412C /* TheMovieDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMovieDB.swift; sourceTree = "<group>"; };
+		4BD9E6F7215506F900C6412C /* Moya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Moya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BD9E6F8215506F900C6412C /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8E983551747B4DB63D8CEC /* Pods_Movie_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movie_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98734F5DB8475F0B257DD00 /* Pods-Movie App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Movie App/Pods-Movie App.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +84,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BD9E6F5215506F900C6412C /* Moya.framework in Frameworks */,
+				4BD9E6F6215506F900C6412C /* Result.framework in Frameworks */,
 				4BD9E6F12154F17E00C6412C /* AlamofireImage.framework in Frameworks */,
 				4BD9E6EF2154E09C00C6412C /* Alamofire.framework in Frameworks */,
 				4BA6CB722154BAE700619901 /* SwiftyJSON.framework in Frameworks */,
@@ -213,6 +221,7 @@
 			children = (
 				4B7E2FEA2154AF7B009A6F0E /* RequestManager.swift */,
 				4BA6CB782154C81000619901 /* RequestTypes.swift */,
+				4BD9E6F3215506C000C6412C /* TheMovieDB.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -220,6 +229,8 @@
 		D82B58F36E3591217CA33B87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4BD9E6F7215506F900C6412C /* Moya.framework */,
+				4BD9E6F8215506F900C6412C /* Result.framework */,
 				4BD9E6F22154F17E00C6412C /* AlamofireImage.framework */,
 				4BD9E6F02154E09C00C6412C /* Alamofire.framework */,
 				4BD9E6EE2154DFB800C6412C /* Alamofire_SwiftyJSON.framework */,
@@ -380,12 +391,16 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Movie App/Pods-Movie App-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +437,7 @@
 				4BA6CB752154BF8700619901 /* Movies.swift in Sources */,
 				4B7E2FEB2154AF7B009A6F0E /* RequestManager.swift in Sources */,
 				4BA6CB792154C81000619901 /* RequestTypes.swift in Sources */,
+				4BD9E6F4215506C000C6412C /* TheMovieDB.swift in Sources */,
 				4B68D26821547C6A00382B07 /* FavoriteMoviesController.swift in Sources */,
 				4B68D26421547C6A00382B07 /* AppDelegate.swift in Sources */,
 				4B68D297215486E900382B07 /* GridItem.swift in Sources */,

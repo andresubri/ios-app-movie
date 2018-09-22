@@ -8,15 +8,20 @@
 
 import UIKit
 import SwiftyJSON
+import Moya
 
 class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    var movies : NSArray = [];
+    var movies : JSON = [];
+    let provider = MoyaProvider<TheMovieDB>()
+    var page = 1
     
     @IBOutlet weak var topRatedCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //state = .loading
+
         topRatedCollectionView.dataSource = self;
         topRatedCollectionView.delegate = self;
         fetchMovies()
@@ -24,16 +29,27 @@ class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICo
 
     func fetchMovies() {
         
-        // Resolve promise and use assign values
-        Movies.topRated(){  responseObject, error in
-            
-            let serializedData = responseObject!["results"] as! NSArray
-            
-            self.movies = serializedData
-            
-            self.topRatedCollectionView.reloadData()
-        }
+        //state = .loading
         
+        provider.request(.topRated(page: self.page)) { result in
+            
+            switch result {
+            case .success(let response):
+                do {
+                    // Parse response
+                    let serialized = try response.mapJSON()
+                    
+                    try self.movies.merge(with: JSON(serialized)["results"])
+                    
+                    // Refresh view with new data
+                    self.topRatedCollectionView.reloadData()
+                } catch {
+                    
+                }
+            case .failure: break
+                
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,5 +74,17 @@ class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICo
         
         return cell;
     }
+    
+    // Fetch new movies on scroll
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
+        {
+            self.page = self.page + 1
+            self.fetchMovies()
+        }
+    }
+    
+    
 }
 
