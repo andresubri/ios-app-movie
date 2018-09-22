@@ -78,7 +78,8 @@ class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICo
     // Fetch new movies on scroll
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
     
-        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
+        // TODO: Smoother scrolling
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height / 6)
         {
             self.page = self.page + 1
             self.fetchMovies()
