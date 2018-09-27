@@ -16,7 +16,7 @@ class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICo
     let provider = MoyaProvider<TheMovieDB>()
     var page = 1
     
-    var selectedMovie : Movie = Movie(id: 0, title: "String", overview: "String", rating: 0.0, poster: "String", releaseDate: "String", backdrop: "String")
+    var selectedMovie : Movie = Movie(id: 0, title: "String", overview: "String", rating: 0.0, poster: "String", releaseDate: "String", backdrop: "String", duration: "0")
 
     
     @IBOutlet weak var topRatedCollectionView: UICollectionView!
@@ -77,8 +77,8 @@ class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICo
         // Serialized object
         let movie = Movie(serializedMovie: movies[indexPath.item])
         
-        cell.setRound()
         cell.titleLabel.text = movie.title;
+        cell.ratingLabel.text = String(movie.releaseDate.prefix(4))
         cell.setImage(path: movie.poster)
         
         return cell;
@@ -88,13 +88,28 @@ class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         self.selectedMovie = Movie(serializedMovie: movies[indexPath.item])
+
+        provider.request(.movie(id: self.selectedMovie.id)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    // Parse response
+                    let serialized = try response.mapJSON()
+                    self.selectedMovie = Movie(serializedMovie: serialized)
+                    //print(JSON(serialized)["runtime"])
+                } catch {
+                }
+            case .failure: break
+            }
+        }
+        
         performSegue(withIdentifier: "TopMovieToDetail", sender: self)
 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let movieDetail : DetailController = segue.destination as! DetailController
-        movieDetail.selected = self.selectedMovie.id
+        movieDetail.movie = self.selectedMovie
     }
     
     // Fetch new movies on scroll
@@ -103,7 +118,7 @@ class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICo
         // TODO: Smoother scrolling
         if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height / 6)
         {
-            self.page = self.page + 1
+            self.page += 1
             self.fetchMovies()
         }
     }

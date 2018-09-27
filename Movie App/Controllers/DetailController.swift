@@ -19,9 +19,10 @@ class DetailController : UIViewController {
     
     var response : JSON = []
     
-    var movie : Movie = Movie(id: 0, title: "String", overview: "String", rating: 0.0, poster: "String", releaseDate: "String", backdrop: "String")
+    var movie : Movie = Movie(id: 0, title: "String", overview: "String", rating: 0.0, poster: "String", releaseDate: "String", backdrop: "String", duration: "0")
     
-    @IBOutlet weak var NavBar: UINavigationBar!
+
+    @IBOutlet weak var navBar: UINavigationItem!
     
     @IBOutlet weak var backgroundPoster: UIImageView!
     
@@ -35,48 +36,17 @@ class DetailController : UIViewController {
     
     @IBOutlet weak var overview: UILabel!
     
-    @IBOutlet weak var leftNavButton: UIBarButtonItem!
-    
-    override func viewWillAppear(_ animated: Bool) {
-     self.fetchMovie()
-     self.viewDidLoad()
-    }
-    
-    func fetchMovie() {
-        
-        //state = .loading
-        
-        provider.request(.movie(id: self.selected)) { result in
-            
-            switch result {
-            case .success(let response):
-                do {
-                    
-                    // Parse response
-                    let serialized = try response.mapJSON()
-                    print(serialized)
-                    self.movie = Movie(serializedMovie: serialized)
-                    
-                } catch {
-                    
-                }
-            case .failure: break
-                
-            }
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(self.movie.title)
-        NavBar.topItem?.title = self.movie.title
+        print(self.movie.duration)
+        navBar.title = self.movie.title
         overview.text = self.movie.overview
-        genre.text = String(self.movie.rating)
+        genre.text = "\(self.movie.rating) / 10"
         releaseDate.text = self.movie.releaseDate
         setPoster(path: self.movie.poster)
         setBackdrop(path: self.movie.backdrop)
-        
+        overview.sizeToFit()
     }
     
     override func didReceiveMemoryWarning() {
@@ -85,22 +55,20 @@ class DetailController : UIViewController {
     
     func setPoster(path: String) {
         if (path.count < 1) {return}
-        let url = URL(string: "https://image.tmdb.org/t/p/w92\(path)")!
-        //let placeholderImage = UIImage(named: "placeholder")!
-        
-        self.mainPoster.af_setImage(withURL: url)
+        let url = URL(string: "https://image.tmdb.org/t/p/w300\(path)")!
+    
+    self.mainPoster.layer.cornerRadius = 12
+        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
+            size: self.mainPoster.frame.size,
+            radius: 6.0
+        )
+        self.mainPoster.af_setImage(withURL: url, filter: filter)
     }
+    
     func setBackdrop(path: String) {
         if (path.count < 1) {return}
-        let url = URL(string: "https://image.tmdb.org/t/p/w92\(path)")!
-        //let placeholderImage = UIImage(named: "placeholder")!
-        
+        let url = URL(string: "https://image.tmdb.org/t/p/w300\(path)")!
         self.backgroundPoster.af_setImage(withURL: url)
-    }
-    
-    
-    @IBAction func `return`(_ sender: Any) {
-        dismiss(animated: true)
     }
     
 }

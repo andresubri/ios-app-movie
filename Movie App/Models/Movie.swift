@@ -18,9 +18,10 @@ class Movie {
     var poster = "";
     var releaseDate = "";
     var backdrop = "";
-    
+    var duration = "";
+
     init(id: Int, title: String, overview: String, rating: Double, poster: String, releaseDate: String,
-         backdrop: String) {
+         backdrop: String, duration: String) {
         self.id = id;
         self.title = title;
         self.overview = overview;
@@ -28,6 +29,7 @@ class Movie {
         self.poster = poster;
         self.releaseDate = releaseDate;
         self.backdrop = backdrop;
+        self.duration = duration;
     }
     
     init(serializedMovie: Any) {
@@ -38,7 +40,8 @@ class Movie {
         self.overview = json["overview"].stringValue
         self.rating = Double(json["vote_average"].stringValue)!
         self.poster = json["poster_path"].stringValue
-        self.releaseDate = json["release_date"].stringValue;
-        self.backdrop = json["backdrop_path"].stringValue;
+        self.releaseDate = json["release_date"].stringValue
+        self.backdrop = json["backdrop_path"].stringValue
+        self.duration = json["runtime"].stringValue
     }
 }
