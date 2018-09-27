@@ -98,7 +98,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nho-ss-RYo">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xvX-El-19M">
@@ -180,6 +180,7 @@
                         <outlet property="backgroundPoster" destination="xvX-El-19M" id="I6s-tf-He2"/>
                         <outlet property="genre" destination="sjC-dr-bam" id="aBB-ni-Z8U"/>
                         <outlet property="mainPoster" destination="vJS-7a-Liq" id="LWV-eW-BX2"/>
+                        <outlet property="mainScrollView" destination="Nho-ss-RYo" id="skr-vu-fAv"/>
                         <outlet property="navBar" destination="g7c-bz-dBX" id="Uhj-bq-xxf"/>
                         <outlet property="overview" destination="VW5-a7-BFo" id="fQO-jg-gPb"/>
                         <outlet property="releaseDate" destination="fjH-1r-SVB" id="6ip-di-n4f"/>
@@ -188,7 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7rI-1Q-fXY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2684" y="0.0"/>
+            <point key="canvasLocation" x="2684" y="-0.44977511244377816"/>
         </scene>
         <!--Favorite Movies Controller-->
         <scene sceneID="wg7-f3-ORb">

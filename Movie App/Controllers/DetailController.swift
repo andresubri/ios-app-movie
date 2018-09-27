@@ -34,12 +34,13 @@ class DetailController : UIViewController {
     
     @IBOutlet weak var releaseDate: UILabel!
     
+    @IBOutlet weak var mainScrollView: UIScrollView!
+    
     @IBOutlet weak var overview: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(self.movie.duration)
         navBar.title = self.movie.title
         overview.text = self.movie.overview
         genre.text = "\(self.movie.rating) / 10"
@@ -47,6 +48,13 @@ class DetailController : UIViewController {
         setPoster(path: self.movie.poster)
         setBackdrop(path: self.movie.backdrop)
         overview.sizeToFit()
+        var contentRect = CGRect.zero
+        
+        for view in mainScrollView.subviews {
+            contentRect = contentRect.union(view.frame)
+        }
+        mainScrollView.contentSize = contentRect.size
+
     }
     
     override func didReceiveMemoryWarning() {
