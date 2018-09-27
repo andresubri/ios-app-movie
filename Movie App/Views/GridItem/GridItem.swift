@@ -15,6 +15,10 @@ class GridItem: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var backgroundImage: UIImageView!
     
+    func setRound() {
+        backgroundImage.layer.cornerRadius = 10
+    }
+    
     func setImage(path: String) {
         if (path.count < 1) {return}
         let url = URL(string: "https://image.tmdb.org/t/p/w92\(path)")!

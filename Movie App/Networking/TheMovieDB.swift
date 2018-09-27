@@ -13,6 +13,7 @@ public enum TheMovieDB {
     static private let publicKey = "87e63202cdc8f4b8ceee237236a9c654"
     
     case topRated(page : Int)
+    case movie(id : Int)
 }
 
 extension TheMovieDB: TargetType {
@@ -25,12 +26,14 @@ extension TheMovieDB: TargetType {
     public var path: String {
         switch self {
         case .topRated: return "/top_rated"
+        case .movie(let id): return "/\(id)"
         }
     }
     
     public var method: Moya.Method {
         switch self {
         case .topRated: return .get
+        case .movie: return .get
         }
     }
     
@@ -47,6 +50,10 @@ extension TheMovieDB: TargetType {
         case .topRated(let page):
             return .requestParameters(
             parameters: ["page": page, "api_key": TheMovieDB.publicKey],
+                encoding: URLEncoding.default)
+        case .movie:
+            return .requestParameters(
+                parameters: ["api_key": TheMovieDB.publicKey],
                 encoding: URLEncoding.default)
         }
     }

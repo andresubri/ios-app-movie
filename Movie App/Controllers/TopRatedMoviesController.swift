@@ -16,7 +16,12 @@ class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICo
     let provider = MoyaProvider<TheMovieDB>()
     var page = 1
     
+    var selectedMovie : Movie = Movie(id: 0, title: "String", overview: "String", rating: 0.0, poster: "String", releaseDate: "String", backdrop: "String")
+
+    
     @IBOutlet weak var topRatedCollectionView: UICollectionView!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +29,7 @@ class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICo
 
         topRatedCollectionView.dataSource = self;
         topRatedCollectionView.delegate = self;
+        activityIndicator.hidesWhenStopped = true
         fetchMovies()
     }
 
@@ -31,6 +37,7 @@ class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICo
         
         //state = .loading
         
+        activityIndicator.startAnimating()
         provider.request(.topRated(page: self.page)) { result in
             
             switch result {
@@ -50,6 +57,7 @@ class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICo
                 
             }
         }
+        activityIndicator.stopAnimating()
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,10 +77,24 @@ class TopRatedMoviesController: UIViewController, UICollectionViewDelegate, UICo
         // Serialized object
         let movie = Movie(serializedMovie: movies[indexPath.item])
         
+        cell.setRound()
         cell.titleLabel.text = movie.title;
         cell.setImage(path: movie.poster)
         
         return cell;
+    }
+    
+    // Navigate to movie detail
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.selectedMovie = Movie(serializedMovie: movies[indexPath.item])
+        performSegue(withIdentifier: "TopMovieToDetail", sender: self)
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let movieDetail : DetailController = segue.destination as! DetailController
+        movieDetail.selected = self.selectedMovie.id
     }
     
     // Fetch new movies on scroll
